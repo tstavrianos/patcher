@@ -15,6 +15,7 @@
     </TargetFrameworkProfile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +68,7 @@
     <Compile Include="Data\DefaultDataFileProvider.cs" />
     <Compile Include="Data\Fallout4PluginListProvider.cs" />
     <Compile Include="Data\ModOrganizerDataFileProvider.cs" />
+    <Compile Include="Data\SkyrimPluginListProvider.cs" />
     <Compile Include="Data\Plugins\Content\ColorAlphaAdapter.cs" />
     <Compile Include="Data\Plugins\Content\ColorAdapter.cs" />
     <Compile Include="Data\Plugins\Content\Constants\Fallout4\Model.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Data\Plugins\Content\Records\Skyrim\Stat.cs" />
     <Compile Include="Data\Plugins\Content\Records\Skyrim\Weap.cs" />
     <Compile Include="Data\Plugins\Content\Records\Skyrim\Wthr.cs" />
+    <Compile Include="Data\Plugins\Content\Records\Skyrim\Npc_.cs" />
     <Compile Include="Data\Plugins\Content\RequiredAttribute.cs" />
     <Compile Include="Data\Plugins\Content\SegmentFaultException.cs" />
     <Compile Include="Data\Plugins\Content\VersionAttribute.cs" />
@@ -349,6 +352,7 @@
     <Compile Include="Data\DefaultPluginListProvider.cs" />
     <Compile Include="Data\StringArrayPluginListProvider.cs" />
     <Compile Include="IO\CustomDeflateStream.cs" />
+    <Compile Include="IO\LZ4.cs" />
     <Compile Include="Data\Plugins\Content\RecordAttribute.cs" />
     <Compile Include="Data\Plugins\Content\MemberInfo.cs" />
     <Compile Include="Data\Plugins\Content\RecordInfo.cs" />

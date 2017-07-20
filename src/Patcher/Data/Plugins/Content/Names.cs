@@ -192,5 +192,17 @@ namespace Patcher.Data.Plugins.Content
         public const string XNAM = "XNAM";
         public const string YNAM = "YNAM";
         public const string ZNAM = "ZNAM";
+
+        public const string ACBS = "ACBS";
+        public const string VTCK = "VTCK";
+        public const string LVLN = "LVLN";
+        public const string TPLT = "TPLT";
+        public const string ATKR = "ATKR";
+        public const string SPOR = "SPOR";
+        public const string OCOR = "OCOR";
+        public const string GWOR = "GWOR";
+        public const string ECOR = "ECOR";
+        public const string PRKZ = "PRKZ";
+        public const string PRKR = "PRKR";
     }
 }

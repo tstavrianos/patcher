@@ -54,8 +54,8 @@ namespace Patcher.Data
         {
             // Create plugin list provider that will use this context specific path to plugins.txt
             // unless DataFileProvider overrides the path
-            return new DefaultPluginListProvider(DataFileProvider, 
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Skyrim\plugins.txt"));
+            return new SkyrimPluginListProvider(DataFileProvider, 
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Skyrim Special Edition\plugins.txt"));
         }
 
         protected override string GetGameTitle()

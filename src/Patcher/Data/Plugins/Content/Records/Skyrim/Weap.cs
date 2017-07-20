@@ -485,27 +485,30 @@ namespace Patcher.Data.Plugins.Content.Records.Skyrim
         class CriticalData : Field
         {
             public ushort Damage { get; set; }
-            private ushort Unknown { get; set; }
+            private ushort Unknown0 { get; set; }
             public float Multiplier { get; set; }
             public CriticalFlags Flags { get; set; }
             public uint SpellEffect { get; set; }
+            private uint Unknown1 { get; set; }
             
             internal override void ReadField(RecordReader reader)
             {
                 Damage = reader.ReadUInt16();
-                Unknown = reader.ReadUInt16();
+                Unknown0 = reader.ReadUInt16();
                 Multiplier = reader.ReadSingle();
                 Flags = (CriticalFlags)reader.ReadUInt32();
                 SpellEffect = reader.ReadReference(FormKindSet.SpelOnly);
+                Unknown1 = reader.ReadUInt32();
             }
 
             internal override void WriteField(RecordWriter writer)
             {
                 writer.Write(Damage);
-                writer.Write(Unknown);
+                writer.Write(Unknown0);
                 writer.Write(Multiplier);
                 writer.Write((uint)Flags);
                 writer.WriteReference(SpellEffect, FormKindSet.SpelOnly);
+                writer.Write(Unknown1);
             }
 
             public override Field CopyField()
@@ -513,17 +516,18 @@ namespace Patcher.Data.Plugins.Content.Records.Skyrim
                 return new CriticalData()
                 {
                     Damage = Damage,
-                    Unknown = Unknown,
+                    Unknown0 = Unknown0,
                     Multiplier = Multiplier,
                     Flags = Flags,
-                    SpellEffect = SpellEffect
+                    SpellEffect = SpellEffect,
+                    Unknown1 = Unknown1
                 };
             }
 
             public override bool Equals(Field other)
             {
                 var cast = (CriticalData)other;
-                return Damage == cast.Damage && Unknown == cast.Unknown && Multiplier == cast.Multiplier && Flags == cast.Flags && SpellEffect == cast.SpellEffect;
+                return Damage == cast.Damage && Unknown0 == cast.Unknown0 && Multiplier == cast.Multiplier && Flags == cast.Flags && SpellEffect == cast.SpellEffect && Unknown1 == cast.Unknown1;
             }
 
             public override IEnumerable<uint> GetReferencedFormIds()

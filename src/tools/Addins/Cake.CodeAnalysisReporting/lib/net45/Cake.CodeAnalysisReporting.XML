@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.CodeAnalysisReporting</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.CodeAnalysisReporting.MsBuildCodeAnalysisReporter">
+            <summary>
+            Class for creating reports from code analysis logfiles.
+            </summary>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.MsBuildCodeAnalysisReporter.CreateCodeAnalysisReport(Cake.Core.IO.IFileSystem,Cake.Core.IO.FilePath,Cake.CodeAnalysisReporting.CodeAnalysisReport,Cake.Core.IO.FilePath)">
+            <summary>
+            Creates a report from a MsBuild logfile.
+            </summary>
+            <param name="fileSystem">Cake file system instance.</param>
+            <param name="logFile">Path of the MsBuild logfile.</param>
+            <param name="report">Type of report which should be created.</param>
+            <param name="outputFile">Path of the generated report file.</param>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.MsBuildCodeAnalysisReporter.CreateCodeAnalysisReport(System.String,System.String)">
+            <summary>
+            Creates a report from a MsBuild logfile.
+            </summary>
+            <param name="logFileContent">Content of the MsBuild logfile.</param>
+            <param name="styleSheetContent">Content of the stylesheet used to generate the report.</param>
+            <returns>Content of the report.</returns>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.CodeAnalysisReportingAliases">
+            <summary>
+            Contains functionality for creating report from code analysis log files.
+            </summary>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.CodeAnalysisReportingAliases.CreateMsBuildCodeAnalysisReport(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.CodeAnalysisReporting.CodeAnalysisReport,Cake.Core.IO.FilePath)">
+            <summary>
+            Creates a report from a MsBuild logfile.
+            </summary>
+            <param name="context">The Cake context.</param>
+            <param name="logFile">Path of the MsBuild logfile.</param>
+            <param name="report">Type of report which should be created.</param>
+            <param name="outputFile">Path of the generated report file.</param>
+            <example>
+            <para>Creates a report from MsBuild warnings grouped by assembly:</para>
+            <code>
+            <![CDATA[
+                CreateMsBuildCodeAnalysisReport(
+                    @"C:\build\msbuild.log",
+                    Report.MsBuildByAssembly,
+                    @"C:\build\issuesByAssembly.html");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.CodeAnalysisReportingAliases.CreateMsBuildCodeAnalysisReport(Cake.Core.ICakeContext,System.String,System.String)">
+            <summary>
+            Creates a report from a MsBuild logfile.
+            </summary>
+            <param name="context">The Cake context.</param>
+            <param name="logFileContent">Content of the MsBuild logfile.</param>
+            <param name="styleSheetContent">Content of the stylesheet used to generate the report.</param>
+            <returns>Content of the report.</returns>
+            <example>
+            <para>Creates a report for a logfile loaded to memory and using a stylesheet from memory:</para>
+            <code>
+            <![CDATA[
+                var reportData =
+                    CreateMsBuildCodeAnalysisReport(
+                        myLogFileContent,
+                        myStyleSheetContent);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.EmbeddedResourceHelper">
+            <summary>
+            Helper class for reading embedded resources.
+            </summary>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.EmbeddedResourceHelper.GetReportStyleSheet(System.String)">
+            <summary>
+            Returns the content of an embedded stylesheet.
+            </summary>
+            <param name="reportName">Name of the stylesheet.</param>
+            <returns>Content of an embedded stylesheet.</returns>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.ArgumentChecks">
+            <summary>
+            Common runtime checks that throw <see cref="T:System.ArgumentException"/> upon failure.
+            </summary>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.ArgumentChecks.NotNull``1(``0,System.String)">
+            <summary>
+            Throws an exception if the specified parameter's value is null.
+            </summary>
+            <typeparam name="T">The type of the parameter.</typeparam>
+            <param name="value">The value of the argument.</param>
+            <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.ArgumentChecks.NotNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws an exception if the specified parameter's value is null, empty or consists only of white-space characters.
+            </summary>
+            <param name="value">The value of the argument.</param>
+            <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is empty or consists only of white-space characters</exception>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.ArgumentChecks.NotUndefined(Cake.CodeAnalysisReporting.CodeAnalysisReport,System.String)">
+            <summary>
+            Throws an exception if the specified parameter's value is <see cref="F:Cake.CodeAnalysisReporting.CodeAnalysisReport.Undefined"/>.
+            </summary>
+            <param name="value">The value of the argument.</param>
+            <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is <see cref="F:Cake.CodeAnalysisReporting.CodeAnalysisReport.Undefined"/></exception>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.CodeAnalysisReport">
+            <summary>
+            Available out-of-the-box reports.
+            </summary>
+        </member>
+        <member name="F:Cake.CodeAnalysisReporting.CodeAnalysisReport.Undefined">
+            <summary>
+            Undefined value.
+            </summary>
+        </member>
+        <member name="F:Cake.CodeAnalysisReporting.CodeAnalysisReport.MsBuildXmlFileLoggerByRule">
+            <summary>
+            Report from a MsBuild logfile generated by the <code>XmlFileLogger</code> class from
+            MSBuild Extension Pack grouped by rule number.
+            </summary>
+        </member>
+        <member name="F:Cake.CodeAnalysisReporting.CodeAnalysisReport.MsBuildXmlFileLoggerByAssembly">
+            <summary>
+            Report from a MsBuild logfile generated by the <code>XmlFileLogger</code> class from
+            MSBuild Extension Pack grouped by assembly.
+            </summary>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.CodeAnalysisReportExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.CodeAnalysisReporting.CodeAnalysisReport"/> enumeration.
+            </summary>
+        </member>
+        <member name="M:Cake.CodeAnalysisReporting.CodeAnalysisReportExtensions.GetStyleSheetResourceName(Cake.CodeAnalysisReporting.CodeAnalysisReport)">
+            <summary>
+            Returns the name of the embedded stylesheet for a specific report.
+            </summary>
+            <param name="report">Report for which the stylesheet should be returned.</param>
+            <returns>Content of the stylesheet.</returns>
+        </member>
+        <member name="T:Cake.CodeAnalysisReporting.ValidatedNotNullAttribute">
+            <summary>
+            Indicates to Code Analysis that a method validates a particular parameter.
+            </summary>
+        </member>
+    </members>
+</doc>

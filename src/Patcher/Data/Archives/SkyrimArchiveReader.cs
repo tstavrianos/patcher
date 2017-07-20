@@ -61,7 +61,8 @@ namespace Patcher.Data.Archives
                 {
                     ulong hash = reader.ReadUInt64();
                     uint count = reader.ReadUInt32();
-                    uint offset = reader.ReadUInt32() - totalFileNameLength;
+                    uint offset = reader.ReadUInt32();
+                    offset -= totalFileNameLength + 36 + 24 * folderCount;
                     folders[i] = new FolderInfo()
                     {
                         FileCount = count,
@@ -72,6 +73,7 @@ namespace Patcher.Data.Archives
                 // Read folder content (name and files)
                 foreach (var folder in folders)
                 {
+                    reader.BaseStream.Seek(folder.ContentOffset, SeekOrigin.Begin);
                     byte folderNameLength = reader.ReadByte();
                     folder.Path = Encoding.UTF8.GetString(reader.ReadBytes(folderNameLength - 1));
                     byte zero = reader.ReadByte();
@@ -79,6 +81,7 @@ namespace Patcher.Data.Archives
                     folder.Files = new FileInfo[folder.FileCount];
                     for (int i = 0; i < folder.FileCount; i++)
                     {
+                        reader.BaseStream.Seek(folder.ContentOffset + folderNameLength + 1 + i * 16, SeekOrigin.Begin);
                         ulong hash = reader.ReadUInt64();
                         uint size = reader.ReadUInt32();
 
@@ -162,9 +165,13 @@ namespace Patcher.Data.Archives
                 var originalSizeBuffer = new byte[4];
                 stream.Read(originalSizeBuffer, 0, 4);
                 uint originalSize = BitConverter.ToUInt32(originalSizeBuffer, 0);
-                
+                var compressedByteData = new byte[length];
+				stream.Read(compressedByteData, 0,(int) length);
+				var uncompressedByteData = new byte[originalSize];
+                LZ4.Decode(compressedByteData, 0, (int)length, uncompressedByteData, 0, (int)originalSize, true);
+				return new MemoryStream(uncompressedByteData);
                 // Deflate stream
-                return new CustomDeflateStream(stream, originalSize);
+                //return new CustomDeflateStream(stream, originalSize);
             }
             else
             { 
