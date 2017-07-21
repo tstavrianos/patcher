@@ -204,5 +204,15 @@ namespace Patcher.Data.Plugins.Content
         public const string ECOR = "ECOR";
         public const string PRKZ = "PRKZ";
         public const string PRKR = "PRKR";
+        public const string PKID = "PKID";
+        public const string SHRT = "SHRT";
+        public const string HDPT = "HDPT";
+        public const string HCLF = "HCLF";
+        public const string CLFM = "CLFM";
+        public const string CSTY = "CSTY";
+        public const string SPCT = "SPCT";
+        public const string SPLO = "SPLO";
+        public const string NULL = "NULL";
+        public const string ATKD = "ATKD";
     }
 }
